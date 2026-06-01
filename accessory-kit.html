@@ -1,0 +1,121 @@
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;width:100%;height:auto}
+*{box-sizing:border-box;margin:0;padding:0}
+.w{width:100%;font-family:'Open Sans',sans-serif;padding:.75rem}
+.step{margin-bottom:0}
+.title{font-size:18px;font-weight:600;color:#222;margin-bottom:.25rem}
+.sub{font-size:16px;color:#555;margin-bottom:1rem}
+ul{list-style:none;padding:0}
+li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #eee;cursor:pointer;-webkit-tap-highlight-color:transparent}
+li:last-child{border-bottom:none}
+li.chk span{color:#999;text-decoration:line-through}
+.cb{width:24px;height:24px;border-radius:5px;border:2px solid #246EFF;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
+.cb.chk{background:#28A745;border-color:#28A745}
+li span{font-size:18px;color:#222;line-height:1.5}
+.note{font-size:16px;color:#246EFF;font-weight:600;margin-top:2px;display:block}
+.pill{display:inline-block;background:#E8F0FF;color:#246EFF;font-size:13px;padding:2px 8px;border-radius:5px;margin-left:6px;font-weight:600;vertical-align:middle}
+.tip{background:#f5f5f3;border-left:3px solid #28A745;border-radius:0 6px 6px 0;padding:10px 13px;font-size:16px;color:#555;margin-top:.75rem;line-height:1.5}
+.tip-blue{background:#EBF3FC;border-left:3px solid #246EFF;border-radius:0 6px 6px 0;padding:10px 13px;font-size:16px;color:#555;margin-top:.75rem;line-height:1.5}
+.tip-blue a{color:#246EFF;font-weight:600}
+.btn{width:100%;margin-top:1rem;padding:13px;background:#ccc;color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:600;font-family:'Open Sans',sans-serif;cursor:not-allowed;transition:background .2s}
+.btn.on{background:#246EFF;cursor:pointer}
+.hidden{display:none}
+.img-section{margin-top:1.25rem}
+.img-section img{width:100%;border-radius:8px;display:block}
+.divider{border:none;border-top:2px solid #eee;margin:1.5rem 0}
+</style>
+
+<div class="w">
+
+  <!-- STEP 1 -->
+  <div class="step" id="step1">
+    <div class="title">Step 1 of 3 - Retrieve the accessory kit</div>
+    <div class="sub">Open the flavor shelf and take out the kit.</div>
+    <ul id="ul1">
+      <li onclick="tog(1,0)"><div class="cb" id="1-0"></div><span>Locate the flavor shelf inside the machine</span></li>
+      <li onclick="tog(1,1)"><div class="cb" id="1-1"></div><span>Remove the accessory kit</span></li>
+    </ul>
+    <button class="btn" id="btn1" disabled onclick="reveal('img1','step2')">Got it</button>
+    <div class="hidden" id="img1">
+      <div class="img-section"><img src="YOUR_STEP1_IMAGE_URL" alt="Flavor shelf location" /></div>
+      <hr class="divider">
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="hidden" id="step2">
+    <div class="title">Step 2 of 3 - Verify kit contents</div>
+    <div class="sub">Check that all required parts are present.</div>
+    <ul id="ul2">
+      <li onclick="tog(2,0)"><div class="cb" id="2-0"></div><span>8 flavor connectors (set aside for later)</span></li>
+      <li onclick="tog(2,1)"><div class="cb" id="2-1"></div><span>Drip tray components (bobber and grate)</span></li>
+      <li onclick="tog(2,2)"><div class="cb" id="2-2"></div>
+        <span>Gen 1 gray grate, install now if included<span class="pill">optional</span><span class="note">See the image below for reference</span></span>
+      </li>
+    </ul>
+    <div class="tip">Not all kits include a Gen 1 gray grate. Skip that item if yours does not have one.</div>
+    <button class="btn" id="btn2" disabled onclick="reveal('img2','step3a')">Contents verified</button>
+    <div class="hidden" id="img2">
+      <div class="img-section"><img src="YOUR_STEP2_IMAGE_URL" alt="Gen 1 gray grate" /></div>
+      <hr class="divider">
+    </div>
+  </div>
+
+  <!-- STEP 3A -->
+  <div class="hidden" id="step3a">
+    <div class="title">Step 3 of 3 - Install the drip tray</div>
+    <div class="sub">Assemble the drip tray components.</div>
+    <ul id="ul3a">
+      <li onclick="tog('3a',0)"><div class="cb" id="3a-0"></div><span>Assemble the drip tray bobber and grate</span></li>
+    </ul>
+    <div class="tip-blue">Optional: If you have a drain kit to install, complete that first before continuing. <a href="https://partners.bevi.co/hc/en-us/articles/14791549495191-Installing-The-Standup-2-0-Drain-Kit" target="_blank">View the drain kit guide</a></div>
+    <button class="btn" id="btn3a" disabled onclick="reveal('img3a','step3b')">Got it</button>
+    <div class="hidden" id="img3a">
+      <div class="img-section"><img src="YOUR_STEP3A_IMAGE_URL" alt="Drip tray assembly" /></div>
+      <hr class="divider">
+    </div>
+  </div>
+
+  <!-- STEP 3B -->
+  <div class="hidden" id="step3b">
+    <div class="title">Step 3 of 3 - Install the drip tray</div>
+    <div class="sub">Slot the drip tray into position.</div>
+    <ul id="ul3b">
+      <li onclick="tog('3b',0)"><div class="cb" id="3b-0"></div><span>Slot the drip tray into the dispense area</span></li>
+    </ul>
+    <button class="btn" id="btn3b" disabled onclick="reveal('img3b',null)">All done</button>
+    <div class="hidden" id="img3b">
+      <div class="img-section"><img src="YOUR_STEP3B_IMAGE_URL" alt="Drip tray in dispense area" /></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var state={'1':[false,false],'2':[false,false,false],'3a':[false],'3b':[false]};
+function chkSvg(){return '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5 5.5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
+function tog(step,i){
+  state[step][i]=!state[step][i];
+  var cb=document.getElementById(step+'-'+i);
+  cb.classList.toggle('chk',state[step][i]);
+  cb.innerHTML=state[step][i]?chkSvg():'';
+  var lis=document.getElementById('ul'+step).querySelectorAll('li');
+  lis[i].classList.toggle('chk',state[step][i]);
+  var done=state[step].every(Boolean);
+  var btn=document.getElementById('btn'+step);
+  btn.disabled=!done;
+  btn.className='btn'+(done?' on':'');
+}
+function reveal(imgId,nextId){
+  var img=document.getElementById(imgId);
+  img.classList.remove('hidden');
+  if(nextId){
+    var next=document.getElementById(nextId);
+    next.classList.remove('hidden');
+    setTimeout(function(){next.scrollIntoView({behavior:'smooth',block:'start'});},50);
+  } else {
+    setTimeout(function(){img.scrollIntoView({behavior:'smooth',block:'start'});},50);
+  }
+}
+</script>
