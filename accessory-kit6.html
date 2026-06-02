@@ -1,0 +1,161 @@
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;width:100%;height:auto}
+*{box-sizing:border-box;margin:0;padding:0}
+.w{width:100%;font-family:'Open Sans',sans-serif;padding:.75rem}
+
+/* Progress bar */
+.progress-wrap{position:sticky;top:0;z-index:100;background:#fff;padding:.6rem .75rem .5rem;margin:0 -.75rem 1.25rem;border-bottom:1px solid #eee}
+.progress-row{display:flex;align-items:center;gap:.75rem}
+.progress-track{flex:1;height:6px;background:#eee;border-radius:3px}
+.progress-fill{height:100%;background:#246EFF;border-radius:3px;transition:width .4s ease}
+.progress-counter{font-size:13px;font-weight:600;color:#246EFF;white-space:nowrap;flex-shrink:0}
+
+/* Steps */
+.step{margin-bottom:0;opacity:.4;transition:opacity .3s;pointer-events:none}
+.step.active{opacity:1;pointer-events:auto}
+.step.done{opacity:.6;pointer-events:none}
+.divider{border:none;border-top:2px solid #eee;margin:1.5rem 0}
+.title{font-size:18px;font-weight:600;color:#222;margin-bottom:.75rem}
+
+/* Step layout: checklist left, image right */
+.step-body{display:flex;gap:1.25rem;align-items:flex-start}
+.step-left{flex:1;min-width:0}
+.step-right{flex-shrink:0;width:250px;text-align:center}
+.step-right img{width:auto;height:auto;max-width:250px;max-height:250px;object-fit:contain;border-radius:8px;display:inline-block}
+
+ul{list-style:none;padding:0}
+li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #eee;cursor:pointer;-webkit-tap-highlight-color:transparent}
+li:last-child{border-bottom:none}
+li.chk span{color:#999;text-decoration:line-through}
+.cb{width:24px;height:24px;border-radius:5px;border:2px solid #246EFF;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
+.cb.chk{background:#28A745;border-color:#28A745}
+li span{font-size:18px;color:#222;line-height:1.5}
+.note{font-size:16px;color:#246EFF;font-weight:600;margin-top:2px;display:block}
+.pill{display:inline-block;background:#E8F0FF;color:#246EFF;font-size:13px;padding:2px 8px;border-radius:5px;margin-left:6px;font-weight:600;vertical-align:middle}
+.tip{background:#f5f5f3;border-left:3px solid #28A745;border-radius:0 6px 6px 0;padding:10px 13px;font-size:16px;color:#555;margin-top:.75rem;line-height:1.5}
+.tip-blue{background:#EBF3FC;border-left:3px solid #246EFF;border-radius:0 6px 6px 0;padding:10px 13px;font-size:16px;color:#555;margin-top:.75rem;line-height:1.5}
+.tip-blue a{color:#246EFF;font-weight:600}
+.btn{width:auto;margin-top:1rem;padding:8px 24px;background:#ccc;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;font-family:'Open Sans',sans-serif;cursor:not-allowed;transition:background .2s}
+.btn.on{background:#246EFF;cursor:pointer}
+
+@media(max-width:500px){
+  .step-body{flex-direction:column}
+  .step-right{width:100%;text-align:center}
+  .step-right img{max-width:100%;max-height:220px}
+}
+</style>
+
+<div class="w">
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-wrap">
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="progress-counter" id="prog-counter">1 / 4</div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step active" id="step1">
+    <div class="title">Step 1 - Retrieve the accessory kit</div>
+    <div class="step-body">
+      <div class="step-left">
+        <ul id="ul1">
+          <li onclick="tog('1',0)"><div class="cb" id="1-0"></div><span>Locate the flavor shelf inside the machine and remove the accessory kit</span></li>
+        </ul>
+        <button class="btn" id="btn1" disabled onclick="advance('step1','step2',2)">Next</button>
+      </div>
+      <div class="step-right"><img src="https://adrianadiaz-del.github.io/step1.2/IMG_6371.gif" alt="Flavor shelf location" /></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <div class="title">Step 2 - Verify kit contents</div>
+    <div class="step-body">
+      <div class="step-left">
+        <ul id="ul2">
+          <li onclick="tog('2',0)"><div class="cb" id="2-0"></div><span>8 flavor connectors (set aside for later)</span></li>
+          <li onclick="tog('2',1)"><div class="cb" id="2-1"></div><span>Drip tray components (bobber and grate)</span></li>
+          <li onclick="tog('2',2)"><div class="cb" id="2-2"></div>
+            <span>Gen 1 gray grate, install now if included<span class="pill">optional</span><span class="note">See the image to the right for reference</span></span>
+          </li>
+        </ul>
+        <div class="tip">Not all kits include a Gen 1 gray grate. Skip that item if yours does not have one.</div>
+        <button class="btn" id="btn2" disabled onclick="advance('step2','step3',3)">Next</button>
+      </div>
+      <div class="step-right"><img src="https://adrianadiaz-del.github.io/step1.2/IMG_5221%20(1).JPG" alt="Gen 1 gray grate" /></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- STEP 3 -->
+  <div class="step" id="step3">
+    <div class="title">Step 3 - Install the drip tray</div>
+    <div class="step-body">
+      <div class="step-left">
+        <ul id="ul3">
+          <li onclick="tog('3',0)"><div class="cb" id="3-0"></div><span>Assemble the drip tray bobber and grate</span></li>
+        </ul>
+        <div class="tip-blue">Optional: If you have a drain kit to install, complete that first before continuing. <a href="https://partners.bevi.co/hc/en-us/articles/14791549495191-Installing-The-Standup-2-0-Drain-Kit" target="_blank">View the drain kit guide</a></div>
+        <button class="btn" id="btn3" disabled onclick="advance('step3','step4',4)">Next</button>
+      </div>
+      <div class="step-right"><img src="https://adrianadiaz-del.github.io/step1.2/IMG_6408%20(1).gif" alt="Drip tray assembly" /></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- STEP 4 -->
+  <div class="step" id="step4">
+    <div class="title">Step 4 - Install the drip tray</div>
+    <div class="step-body">
+      <div class="step-left">
+        <ul id="ul4">
+          <li onclick="tog('4',0)"><div class="cb" id="4-0"></div><span>Slot the drip tray into the dispense area</span></li>
+        </ul>
+      </div>
+      <div class="step-right"><img src="https://adrianadiaz-del.github.io/step1.2/Drip%20tray.jpg" alt="Drip tray in dispense area" /></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var state={'1':[false],'2':[false,false,false],'3':[false],'4':[false]};
+var totalSteps=4;
+
+function chkSvg(){return '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3.5 3.5 5.5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
+
+function updateProgress(num){
+  var pct=((num-1)/(totalSteps-1))*100;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-counter').textContent=num+' / '+totalSteps;
+}
+
+function tog(step,i){
+  state[step][i]=!state[step][i];
+  var cb=document.getElementById(step+'-'+i);
+  cb.classList.toggle('chk',state[step][i]);
+  cb.innerHTML=state[step][i]?chkSvg():'';
+  var lis=document.getElementById('ul'+step).querySelectorAll('li');
+  lis[i].classList.toggle('chk',state[step][i]);
+  var done=state[step].every(Boolean);
+  var btn=document.getElementById('btn'+step);
+  if(btn){btn.disabled=!done;btn.className='btn'+(done?' on':'');}
+}
+
+function advance(currentId,nextId,nextNum){
+  var current=document.getElementById(currentId);
+  current.classList.remove('active');
+  current.classList.add('done');
+  var next=document.getElementById(nextId);
+  next.classList.add('active');
+  updateProgress(nextNum);
+  setTimeout(function(){next.scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+</script>
